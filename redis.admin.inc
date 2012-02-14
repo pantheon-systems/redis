@@ -41,6 +41,12 @@ function redis_settings_form($form, &$form_state) {
     '#default_value' => variable_get('redis_client_base', NULL),
     '#description' => t("Redis server database. Default is none, Redis server will autoselect the database 0."),
   );
+  $form['connection']['redis_client_password'] = array(
+    '#type' => 'password',
+    '#title' => t("Password"),
+    '#default_value' => variable_get('redis_client_password', NULL),
+    '#description' => t("Redis password for authentication. Default is none."),
+  );
   $form['connection']['redis_client_interface'] = array(
     '#type' => 'radios',
     '#title' => t("Client"),
