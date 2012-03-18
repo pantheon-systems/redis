@@ -13,7 +13,7 @@ class Redis_Client_PhpRedis implements Redis_Client_Interface {
     }
     catch (RedisException $e) {
       if ($e->getMessage() != 'Redis server went away') {
-        throw new RedisException($e->getMessage())
+        throw new RedisException($e->getMessage());
       }
     }
 
