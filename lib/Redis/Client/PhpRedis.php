@@ -7,8 +7,16 @@ class Redis_Client_PhpRedis implements Redis_Client_Interface {
 
   public function getClient($host = NULL, $port = NULL, $base = NULL, $password = NULL) {
     $client = new Redis;
-    $client->connect($host, $port);
-    
+    // Catch annoying "Redis server went away" messages.
+    try {
+      $client->connect($host, $port);
+    }
+    catch (RedisException $e) {
+      if ($e->getMessage() != 'Redis server went away') {
+        throw new RedisException($e->getMessage())
+      }
+    }
+
     if (isset($password)) {
       $client->auth($password);
     }
